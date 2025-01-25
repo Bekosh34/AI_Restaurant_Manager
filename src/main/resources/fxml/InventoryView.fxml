@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.InventoryController">
+    <Label text="Manage Inventory" style="-fx-font-size: 24px;" />
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="itemNameField" promptText="Item Name" />
+        <TextField fx:id="quantityField" promptText="Quantity" />
+        <Button text="Add Item" onAction="#handleAddItem" />
+    </HBox>
+    <TableView fx:id="inventoryTable" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="itemNameColumn" text="Item Name" />
+            <TableColumn fx:id="quantityColumn" text="Quantity" />
+        </columns>
+    </TableView>
+    <Button text="Delete Selected Item" onAction="#handleDeleteItem" />
+    <Button text="Back to Main Menu" onAction="#handleBack" />
+</VBox>

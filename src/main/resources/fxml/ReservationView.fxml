@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReservationController">
+    <Label text="Manage Reservations" style="-fx-font-size: 24px;" />
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="customerNameField" promptText="Customer Name" />
+        <TextField fx:id="dateField" promptText="Date (YYYY-MM-DD)" />
+        <TextField fx:id="tableNumberField" promptText="Table Number" />
+        <Button text="Add Reservation" onAction="#handleAddReservation" />
+    </HBox>
+    <TableView fx:id="reservationTable" prefHeight="300" prefWidth="500">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="customerNameColumn" text="Customer Name" />
+            <TableColumn fx:id="dateColumn" text="Date" />
+            <TableColumn fx:id="tableNumberColumn" text="Table Number" />
+        </columns>
+    </TableView>
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Delete Selected Reservation" onAction="#handleDeleteReservation" />
+        <Button text="Back to Main Menu" onAction="#handleBack" />
+    </HBox>
+</VBox>

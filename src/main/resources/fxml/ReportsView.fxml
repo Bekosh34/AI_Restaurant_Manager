@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReportsController">
+    <Label text="Generate Reports" style="-fx-font-size: 24px;" />
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Generate Reservation Report" onAction="#handleReservationReport" />
+        <Button text="Generate Inventory Report" onAction="#handleInventoryReport" />
+        <Button text="Generate Staff Report" onAction="#handleStaffReport" />
+    </HBox>
+    <TextArea fx:id="reportArea" prefHeight="300" prefWidth="500" wrapText="true" />
+    <Button text="Back to Main Menu" onAction="#handleBack" />
+</VBox>

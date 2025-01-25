@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.StaffController">
+    <Label text="Manage Staff" style="-fx-font-size: 24px;" />
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="staffNameField" promptText="Staff Name" />
+        <TextField fx:id="roleField" promptText="Role" />
+        <Button text="Add Staff" onAction="#handleAddStaff" />
+    </HBox>
+    <TableView fx:id="staffTable" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="staffNameColumn" text="Staff Name" />
+            <TableColumn fx:id="roleColumn" text="Role" />
+        </columns>
+    </TableView>
+    <Button text="Delete Selected Staff" onAction="#handleDeleteStaff" />
+    <Button text="Back to Main Menu" onAction="#handleBack" />
+</VBox>
