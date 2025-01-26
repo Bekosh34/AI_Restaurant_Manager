@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="restaurant.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="982"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="3" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="staff" custom_title="0" dock_id="1" table="4,5:mainstaff"/><dock_state state="000000ff00000000fd0000000100000002000002490000020efc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000002490000011e00ffffff000002490000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="inventory" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="71"/><column index="3" value="55"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="reservations" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="111"/><column index="2" value="98"/><column index="3" value="85"/><column index="4" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="staff" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="132"/><column index="3" value="179"/><column index="4" value="46"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">INSERT INTO staff (name, role, salary) VALUES
+('Emily Carter', 'Pastry Chef', 38000),
+('Michael Brown', 'Host', 26000),
+('Sarah Johnson', 'Sous Chef', 42000),
+('David Wilson', 'Dishwasher', 18000),
+('Sophia Davis', 'Sommelier', 40000),
+('Liam Miller', 'Line Cook', 36000),
+('Olivia Anderson', 'Head Waiter', 30000),
+('Noah Thomas', 'Janitor', 22000),
+('Emma Moore', 'Receptionist', 27000),
+('Ava Taylor', 'Baker', 39000),
+('Isabella Jackson', 'Bar Manager', 45000),
+('James White', 'Kitchen Porter', 20000),
+('Charlotte Harris', 'Front of House Manager', 50000),
+('Benjamin Martin', 'Delivery Driver', 25000),
+('Amelia Thompson', 'Prep Cook', 34000),
+('Elijah Garcia', 'Bartender', 32000),
+('Lucas Martinez', 'Executive Chef', 75000),
+('Mia Robinson', 'Event Coordinator', 47000),
+('Harper Clark', 'Inventory Manager', 48000),
+('Evelyn Rodriguez', 'HR Specialist', 52000);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

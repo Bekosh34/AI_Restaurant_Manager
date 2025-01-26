@@ -1,25 +1,31 @@
 package com.ai.restaurant.model;
 
 public class Staff {
-    private final int id;
-    private final String staffName;
-    private final String role;
+    private int id;
+    private String name;
+    private String role;
+    private int salary;
 
-    public Staff(int id, String staffName, String role) {
+    public Staff(int id, String name, String role, int salary) {
         this.id = id;
-        this.staffName = staffName;
+        this.name = name;
         this.role = role;
+        this.salary = salary;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getStaffName() {
-        return staffName;
+    public String getName() {
+        return name;
     }
 
     public String getRole() {
         return role;
+    }
+
+    public int getSalary() {
+        return salary;
     }
 }

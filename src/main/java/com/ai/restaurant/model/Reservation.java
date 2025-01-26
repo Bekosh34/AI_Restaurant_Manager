@@ -1,10 +1,10 @@
 package com.ai.restaurant.model;
 
 public class Reservation {
-    private final int id;
-    private final String customerName;
-    private final String date;
-    private final int tableNumber;
+    private int id;
+    private String customerName;
+    private String date;
+    private int tableNumber;
 
     public Reservation(int id, String customerName, String date, int tableNumber) {
         this.id = id;

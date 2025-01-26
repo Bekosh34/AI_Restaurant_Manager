@@ -4,18 +4,21 @@
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.StaffController">
     <Label text="Manage Staff" style="-fx-font-size: 24px;" />
-    <HBox spacing="10" alignment="CENTER">
-        <TextField fx:id="staffNameField" promptText="Staff Name" />
-        <TextField fx:id="roleField" promptText="Role" />
-        <Button text="Add Staff" onAction="#handleAddStaff" />
-    </HBox>
-    <TableView fx:id="staffTable" prefHeight="200">
+    <Label fx:id="aiRecommendationLabel" text="AI Recommendations appear here..." style="-fx-font-size: 16px; -fx-text-fill: blue;" />
+    <TableView fx:id="staffTable" prefHeight="300" prefWidth="500">
         <columns>
-            <TableColumn fx:id="idColumn" text="ID" />
-            <TableColumn fx:id="staffNameColumn" text="Staff Name" />
-            <TableColumn fx:id="roleColumn" text="Role" />
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50" />
+            <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
+            <TableColumn fx:id="roleColumn" text="Role" prefWidth="150" />
+            <TableColumn fx:id="salaryColumn" text="Salary" prefWidth="100" />
         </columns>
     </TableView>
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="nameField" promptText="Name" />
+        <TextField fx:id="roleField" promptText="Role" />
+        <TextField fx:id="salaryField" promptText="Salary" />
+        <Button text="Add Staff" onAction="#handleAddStaff" />
+    </HBox>
     <Button text="Delete Selected Staff" onAction="#handleDeleteStaff" />
     <Button text="Back to Main Menu" onAction="#handleBack" />
 </VBox>

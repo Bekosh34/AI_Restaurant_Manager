@@ -7,12 +7,7 @@ import java.sql.SQLException;
 public class DatabaseManager {
     private static final String URL = "jdbc:sqlite:restaurant.db";
 
-    public static Connection connect() {
-        try {
-            return DriverManager.getConnection(URL);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to connect to the database.");
-        }
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL);
     }
 }

@@ -1,17 +1,15 @@
 package com.ai.restaurant.database;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class DatabaseTest {
     public static void main(String[] args) {
-        try (Connection conn = DatabaseManager.connect()) {
-            if (conn != null) {
-                System.out.println("Connection to SQLite has been established!");
-            } else {
-                System.out.println("Failed to connect to SQLite!");
-            }
-        } catch (Exception e) {  // Catching SQLException or other exceptions
+        try (Connection connection = DatabaseManager.getConnection()) {
+            System.out.println("Database connection successful!");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+
