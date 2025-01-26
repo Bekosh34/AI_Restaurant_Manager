@@ -2,10 +2,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.MainController">
-    <Label text="AI Restaurant Manager" style="-fx-font-size: 24px;" />
-    <Button fx:id="reservationButton" text="Manage Reservations" onAction="#handleReservationButton" />
-    <Button fx:id="inventoryButton" text="Manage Inventory" onAction="#handleInventoryButton" />
-    <Button fx:id="staffButton" text="Manage Staff" onAction="#handleStaffButton" />
-    <Button fx:id="reportsButton" text="Generate Reports" onAction="#handleReportsButton" />
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.MainController">
+    <Label text="AI Restaurant Manager" style="-fx-font-size: 24px;"/>
+    <Button text="Manage Reservations" onAction="#handleReservationsButton"/>
+    <Button text="Manage Inventory" onAction="#handleInventoryButton"/>
+    <Button text="Manage Staff" onAction="#handleStaffButton"/>
+    <Button text="Generate Reports" onAction="#handleReportsButton"/>
 </VBox>

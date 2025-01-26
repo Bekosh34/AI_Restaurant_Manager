@@ -1,25 +1,35 @@
 package com.ai.restaurant.model;
 
-import weka.classifiers.Classifier;
-import weka.classifiers.trees.J48;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
 import weka.core.Instances;
-import weka.core.converters.ConverterUtils.DataSource;
+
+import java.util.ArrayList;
 
 public class TrainModel {
-    public static void main(String[] args) throws Exception {
-        // Load the dataset (ARFF file stored in resources/datasets)
-        DataSource source = new DataSource("src/main/resources/datasets/reservation_data.arff");
-        Instances dataset = source.getDataSet();
 
-        // Set the class index (the last attribute in the ARFF file)
-        dataset.setClassIndex(dataset.numAttributes() - 1);
+    private static Instances dataset;
 
-        // Train a decision tree model (J48 in Weka)
-        J48 tree = new J48();
-        tree.buildClassifier(dataset);
+    public static Instances createEmptyDataset() {
+        if (dataset == null) {
+            ArrayList<Attribute> attributes = new ArrayList<>();
+            attributes.add(new Attribute("feature1")); // Example feature 1
+            attributes.add(new Attribute("feature2")); // Example feature 2
+            attributes.add(new Attribute("class")); // Class attribute (target)
 
-        // Save the trained model to a file
-        weka.core.SerializationHelper.write("src/main/resources/models/reservation_model.model", tree);
-        System.out.println("Model trained and saved successfully!");
+            dataset = new Instances("TrainingData", attributes, 0);
+            dataset.setClassIndex(attributes.size() - 1);
+        }
+        return dataset;
+    }
+
+    public static void addInstance(Instances dataset, double[] features, double classValue) {
+        DenseInstance instance = new DenseInstance(features.length + 1);
+        for (int i = 0; i < features.length; i++) {
+            instance.setValue(dataset.attribute(i), features[i]);
+        }
+        instance.setValue(dataset.attribute(features.length), classValue);
+        instance.setDataset(dataset);
+        dataset.add(instance);
     }
 }

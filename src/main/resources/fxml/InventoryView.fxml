@@ -3,20 +3,21 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.InventoryController">
-    <Label text="Manage Inventory" style="-fx-font-size: 24px;" />
-    <Label fx:id="aiRecommendationLabel" text="AI Recommendations appear here..." style="-fx-font-size: 16px; -fx-text-fill: blue;" />
-    <HBox spacing="10" alignment="CENTER">
-        <TextField fx:id="itemNameField" promptText="Item Name" />
-        <TextField fx:id="quantityField" promptText="Quantity" />
-        <Button text="Add Item" onAction="#handleAddItem" />
+    <Label text="Manage Inventory" style="-fx-font-size: 24px;"/>
+    <Label fx:id="aiInventoryLabel" text="AI Suggestions will appear here..." style="-fx-text-fill: blue;"/>
+    <HBox spacing="10">
+        <TextField fx:id="itemNameField" promptText="Item Name"/>
+        <TextField fx:id="quantityField" promptText="Quantity"/>
+        <Button text="Add Item" onAction="#handleAddItem"/>
     </HBox>
-    <TableView fx:id="inventoryTable" prefHeight="300" prefWidth="500">
+    <TableView fx:id="inventoryTable">
         <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="50" />
-            <TableColumn fx:id="itemNameColumn" text="Item Name" prefWidth="200" />
-            <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100" />
+            <TableColumn text="ID" fx:id="idColumn"/>
+            <TableColumn text="Item Name" fx:id="itemNameColumn"/>
+            <TableColumn text="Quantity" fx:id="quantityColumn"/>
         </columns>
     </TableView>
-    <Button text="Delete Selected Item" onAction="#handleDeleteItem" />
-    <Button text="Back to Main Menu" onAction="#handleBack" />
+    <Button text="Update Quantity" onAction="#handleUpdateQuantity"/>
+    <Button text="Delete Selected Item" onAction="#handleDeleteItem"/>
+    <Button text="Back to Main Menu" onAction="#handleBack"/>
 </VBox>
