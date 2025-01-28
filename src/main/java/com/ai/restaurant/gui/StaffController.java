@@ -36,18 +36,32 @@ public class StaffController {
 
     @FXML
     public void initialize() {
-        // Set up the table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
 
-        // Load staff data
         loadStaffData();
     }
 
     private void loadStaffData() {
         staffList = FXCollections.observableArrayList(StaffManager.getAllStaff());
         staffTable.setItems(staffList);
+    }
+
+    @FXML
+    private Label aiRecommendationLabel;
+
+    @FXML
+    private void generateAIStaffSuggestions() {
+        try {
+            // Example features: salary (you can use other features like role or hours)
+            double[] features = {Double.parseDouble(roleField.getText()), 1.0};
+            String prediction = AIModel.predictStaff(features);
+            aiRecommendationLabel.setText("AI Suggestion: " + prediction);
+        } catch (Exception e) {
+            aiRecommendationLabel.setText("Error generating staff suggestions.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -60,7 +74,8 @@ public class StaffController {
             return;
         }
 
-        Staff staff = new Staff(0, name, role); // ID is 0 as it’s auto-generated
+        Staff staff = new Staff(0, name, role, 0.0); // Replace 0.0 with an actual salary if available
+        ; // ID is 0 as it’s auto-generated
         if (StaffManager.addStaff(staff)) {
             feedbackLabel.setText("Staff member added successfully!");
             loadStaffData();
@@ -110,36 +125,7 @@ public class StaffController {
     }
 
     @FXML
-    private Label aiStaffLabel; // Add this in your FXML for AI suggestions
-
-    @FXML
-    private void handleOptimizeStaffSchedule() {
-        try {
-            // Example features: current shift hour and demand level
-            double[] currentFeatures = {3.0, 2.0}; // Example: shift hour and current demand
-            String prediction = AIModel.predictReservation(currentFeatures); // Reuse AIModel for prediction
-            aiStaffLabel.setText("AI Suggestion: " + prediction);
-        } catch (Exception e) {
-            aiStaffLabel.setText("AI Error: Unable to generate suggestions.");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleOptimizeStaffSchedule() {
-        try {
-            double[] currentFeatures = {3.0, 2.0}; // Example: shift hour and demand level
-            String prediction = AIModel.predictStaff(currentFeatures);
-            feedbackLabel.setText("AI Suggestion: " + prediction);
-        } catch (Exception e) {
-            feedbackLabel.setText("AI Error: Unable to generate suggestions.");
-            e.printStackTrace();
-        }
-    }
-
-
-    @FXML
     private void handleBack() {
-        staffTable.getScene().getWindow().hide(); // Close the current window
+        staffTable.getScene().getWindow().hide();
     }
 }

@@ -2,38 +2,40 @@ package com.ai.restaurant.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class MainController {
 
     @FXML
-    private void handleReservationButton() {
-        loadFXML("/fxml/ReservationView.fxml", "Manage Reservations");
+    private void handleReservationsButton() {
+        openView("/fxml/ReservationView.fxml");
     }
 
     @FXML
     private void handleInventoryButton() {
-        loadFXML("/fxml/InventoryView.fxml", "Manage Inventory");
+        openView("/fxml/InventoryView.fxml");
     }
 
     @FXML
     private void handleStaffButton() {
-        loadFXML("/fxml/StaffView.fxml", "Manage Staff");
+        openView("/fxml/StaffView.fxml");
     }
 
     @FXML
     private void handleReportsButton() {
-        loadFXML("/fxml/ReportsView.fxml", "Generate Reports");
+        openView("/fxml/ReportsView.fxml");
     }
 
-    private void loadFXML(String fxmlPath, String title) {
+    private void openView(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle(title);
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

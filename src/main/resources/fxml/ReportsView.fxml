@@ -3,14 +3,29 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReportsController">
-    <Label text="Generate Reports" style="-fx-font-size: 24px;"/>
+    <Label text="AI-Generated Reports" style="-fx-font-size: 24px;"/>
     <Label fx:id="aiRecommendationLabel" text="AI Recommendations will appear here..." style="-fx-text-fill: blue;"/>
+
     <HBox spacing="10">
-        <Button text="Generate Reservation Report" onAction="#handleGenerateReservationReport"/>
-        <Button text="Generate Inventory Report" onAction="#handleGenerateInventoryReport"/>
-        <Button text="Generate Staff Report" onAction="#handleGenerateStaffReport"/>
-        <Button text="Generate AI Insights" onAction="#handleGenerateAIInsights"/>
+        <Button text="Predict Reservations" onAction="#handlePredictReservations"/>
+        <Button text="Predict Inventory" onAction="#handlePredictInventory"/>
+        <Button text="Predict Staff" onAction="#handlePredictStaff"/>
+        <Button text="Predict Future Demand" onAction="#handlePredictFutureDemand"/>
     </HBox>
-    <TextArea fx:id="reportArea" prefHeight="300" prefWidth="500" wrapText="true"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="inputField" promptText="Enter Date or Item"/>
+        <Button text="Custom Predict" onAction="#handleCustomPrediction"/>
+    </HBox>
+
+    <!-- Table to show AI reports -->
+    <TableView fx:id="aiReportTable" prefHeight="300" prefWidth="500">
+        <columns>
+            <TableColumn fx:id="colCategory" text="Category"/>
+            <TableColumn fx:id="colPrediction" text="Prediction"/>
+            <TableColumn fx:id="colRecommendation" text="Recommendation"/>
+        </columns>
+    </TableView>
+
     <Button text="Back to Main Menu" onAction="#handleBack"/>
 </VBox>

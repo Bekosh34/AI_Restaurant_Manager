@@ -14,22 +14,23 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("AI Restaurant Manager");
 
+        // Initialize and train the AI model
         try {
-            // Train the AI model during startup
-            System.out.println("Training AI model...");
             AIModel.trainModel();
             System.out.println("AI Model trained successfully!");
+        } catch (Exception e) {
+            System.out.println("Error initializing the AI model: " + e.getMessage());
+            e.printStackTrace();
+        }
 
-            // Load the main view
+        // Load MainView
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
-            System.err.println("Error loading the main view: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Error initializing the AI model: " + e.getMessage());
+            System.out.println("Error loading the main view: " + e.getMessage());
             e.printStackTrace();
         }
     }

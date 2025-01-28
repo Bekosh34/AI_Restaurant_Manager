@@ -1,8 +1,8 @@
 package com.ai.restaurant.gui;
 
+import com.ai.restaurant.ai.AIModel;
 import com.ai.restaurant.managers.InventoryManager;
 import com.ai.restaurant.model.Inventory;
-import com.ai.restaurant.ai.AIModel; // Use AIModel from the ai package
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,42 +32,28 @@ public class InventoryController {
     @FXML
     private Label feedbackLabel;
 
-    @FXML
-    private Label aiInventoryLabel; // For AI suggestions
-
     private ObservableList<Inventory> inventoryList;
 
     @FXML
     public void initialize() {
-        // Set up the table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        // Load inventory data
         loadInventoryData();
 
-        // Update AI suggestions
-        updateAIInventorySuggestions();
+        // Debugging
+        if (feedbackLabel == null) {
+            System.out.println("FeedbackLabel is null!");
+        } else {
+            System.out.println("FeedbackLabel is initialized.");
+        }
     }
 
     private void loadInventoryData() {
         inventoryList = FXCollections.observableArrayList(InventoryManager.getAllInventoryItems());
         inventoryTable.setItems(inventoryList);
     }
-
-    @FXML
-    private void handleGenerateInventoryInsights() {
-        try {
-            double[] currentFeatures = {5.0, 10.0}; // Example features: stock levels and reorder history
-            String prediction = AIModel.predictInventory(currentFeatures);
-            aiInventoryLabel.setText("AI Suggestion: " + prediction);
-        } catch (Exception e) {
-            aiInventoryLabel.setText("AI Error: Unable to generate suggestions.");
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     private void handleAddItem() {
@@ -85,7 +71,6 @@ public class InventoryController {
             if (InventoryManager.addInventoryItem(inventory)) {
                 feedbackLabel.setText("Item added successfully!");
                 loadInventoryData();
-                updateAIInventorySuggestions();
             } else {
                 feedbackLabel.setText("Error: Unable to add item.");
             }
@@ -114,7 +99,6 @@ public class InventoryController {
             if (InventoryManager.updateInventoryQuantity(selectedInventory.getId(), newQuantity)) {
                 feedbackLabel.setText("Quantity updated successfully!");
                 loadInventoryData();
-                updateAIInventorySuggestions();
             } else {
                 feedbackLabel.setText("Error: Unable to update quantity.");
             }
@@ -135,35 +119,30 @@ public class InventoryController {
         if (InventoryManager.deleteInventoryItem(selectedInventory.getId())) {
             feedbackLabel.setText("Item deleted successfully!");
             loadInventoryData();
-            updateAIInventorySuggestions();
         } else {
             feedbackLabel.setText("Error: Unable to delete item.");
         }
     }
 
     @FXML
-    private void handleGenerateInventoryInsights() {
+    private Label aiRecommendationLabel;
+
+    @FXML
+    private void generateAIInventorySuggestions() {
         try {
-            // Example features: [current stock level, reorder threshold]
-            double[] currentFeatures = {averageStockLevel(), reorderThreshold()};
-            String prediction = AIModel.predictInventory(currentFeatures);
-            aiInventoryLabel.setText("AI Suggestion: " + prediction);
+            // Example features: quantity
+            double[] features = {Double.parseDouble(quantityField.getText()), 1.0};
+            String prediction = AIModel.predictInventory(features);
+            aiRecommendationLabel.setText("AI Suggestion: " + prediction);
         } catch (Exception e) {
-            aiInventoryLabel.setText("AI Error: Unable to generate suggestions.");
+            aiRecommendationLabel.setText("Error generating inventory suggestions.");
             e.printStackTrace();
         }
     }
 
-    private double averageStockLevel() {
-        return inventoryList.stream().mapToInt(Inventory::getQuantity).average().orElse(0.0);
-    }
-
-    private double reorderThreshold() {
-        return 10.0; // Example: Define threshold dynamically based on usage
-    }
 
     @FXML
     private void handleBack() {
-        inventoryTable.getScene().getWindow().hide(); // Close the current window
+        inventoryTable.getScene().getWindow().hide();
     }
 }

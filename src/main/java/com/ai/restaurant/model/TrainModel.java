@@ -2,24 +2,27 @@ package com.ai.restaurant.model;
 
 import weka.core.Attribute;
 import weka.core.DenseInstance;
+import weka.core.FastVector;
 import weka.core.Instances;
-
-import java.util.ArrayList;
 
 public class TrainModel {
 
-    private static Instances dataset;
-
     public static Instances createEmptyDataset() {
-        if (dataset == null) {
-            ArrayList<Attribute> attributes = new ArrayList<>();
-            attributes.add(new Attribute("feature1")); // Example feature 1
-            attributes.add(new Attribute("feature2")); // Example feature 2
-            attributes.add(new Attribute("class")); // Class attribute (target)
+        Attribute attr1 = new Attribute("Feature1");
+        Attribute attr2 = new Attribute("Feature2");
+        FastVector classValues = new FastVector(2);
+        classValues.addElement("Positive");
+        classValues.addElement("Negative");
+        Attribute classAttr = new Attribute("Class", classValues);
 
-            dataset = new Instances("TrainingData", attributes, 0);
-            dataset.setClassIndex(attributes.size() - 1);
-        }
+        FastVector attributes = new FastVector(3);
+        attributes.addElement(attr1);
+        attributes.addElement(attr2);
+        attributes.addElement(classAttr);
+
+        Instances dataset = new Instances("Dataset", attributes, 0);
+        dataset.setClassIndex(dataset.numAttributes() - 1);
+
         return dataset;
     }
 
@@ -28,8 +31,7 @@ public class TrainModel {
         for (int i = 0; i < features.length; i++) {
             instance.setValue(dataset.attribute(i), features[i]);
         }
-        instance.setValue(dataset.attribute(features.length), classValue);
-        instance.setDataset(dataset);
+        instance.setValue(dataset.classAttribute(), classValue);
         dataset.add(instance);
     }
 }
