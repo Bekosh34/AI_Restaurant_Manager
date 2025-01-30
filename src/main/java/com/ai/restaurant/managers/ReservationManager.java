@@ -1,34 +1,28 @@
 package com.ai.restaurant.managers;
 
-import com.ai.restaurant.database.DatabaseManager;
+import com.ai.restaurant.database.DatabaseHelper;
 import com.ai.restaurant.model.Reservation;
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import com.ai.restaurant.database.DatabaseHelper;
-import java.sql.ResultSet;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
 
 public class ReservationManager {
 
+    // Retrieve all reservations from the database
     public static List<Reservation> getAllReservations() {
         List<Reservation> reservations = new ArrayList<>();
-        try (Connection connection = DatabaseManager.getConnection()) {
-            String sql = "SELECT * FROM reservations";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+        String query = "SELECT * FROM reservations";
 
-            while (resultSet.next()) {
+        try (Connection conn = DatabaseHelper.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
                 reservations.add(new Reservation(
-                        resultSet.getInt("id"),
-                        resultSet.getString("customer_name"),
-                        resultSet.getString("date"),
-                        resultSet.getInt("table_number") // Ensure this matches the database type
+                        rs.getInt("id"),
+                        rs.getString("customer_name"),
+                        rs.getString("date"),
+                        rs.getInt("table_number")
                 ));
             }
         } catch (SQLException e) {
@@ -37,50 +31,41 @@ public class ReservationManager {
         return reservations;
     }
 
-    public static Map<String, Integer> getReservationCountsByDate() {
-        Map<String, Integer> reservationCounts = new HashMap<>();
-        String query = "SELECT date, COUNT(*) FROM reservations GROUP BY date";
+    // Add a new reservation to the database
+    public static boolean addReservation(Reservation reservation) {
+        String query = "INSERT INTO reservations (customer_name, date, table_number) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseHelper.connect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            while (rs.next()) {
-                reservationCounts.put(rs.getString("date"), rs.getInt("COUNT(*)"));
-            }
+            pstmt.setString(1, reservation.getCustomerName());
+            pstmt.setString(2, reservation.getDate());
+            pstmt.setInt(3, reservation.getTableNumber());
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return reservationCounts;
+        return false;
     }
 
-
-    public static boolean addReservation(Reservation reservation) {
-        try (Connection connection = DatabaseManager.getConnection()) {
-            String sql = "INSERT INTO reservations (customer_name, date, table_number) VALUES (?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, reservation.getCustomerName());
-            statement.setString(2, reservation.getDate());
-            statement.setInt(3, reservation.getTableNumber()); // Pass tableNumber as int
-            return statement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
+    // Delete a reservation from the database by ID
     public static boolean deleteReservation(int id) {
-        // Logic to delete a reservation by ID from the database
-        // Example:
-        try (Connection connection = DatabaseManager.getConnection()) {
-            String sql = "DELETE FROM reservations WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
+        String query = "DELETE FROM reservations WHERE id = ?";
+
+        try (Connection conn = DatabaseHelper.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, id);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 }

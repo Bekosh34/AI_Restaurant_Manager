@@ -5,22 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseHelper {
-
-    private static final String URL = "jdbc:sqlite:restaurant.db"; // Change to your actual DB path
+    private static final String URL = "jdbc:sqlite:restaurant.db";
     private static final String DRIVER = "org.sqlite.JDBC";
-
-    public static void main(String[] args) {
-        try (Connection conn = DatabaseHelper.connect()) {
-            System.out.println("Database connected successfully!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     static {
         try {
-            Class.forName(DRIVER); // Ensure SQLite driver is loaded
+            Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException("Database driver not found!");

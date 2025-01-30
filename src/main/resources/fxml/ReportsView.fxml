@@ -3,29 +3,21 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReportsController">
-    <Label text="AI-Generated Reports" style="-fx-font-size: 24px;"/>
-    <Label fx:id="aiRecommendationLabel" text="AI Recommendations will appear here..." style="-fx-text-fill: blue;"/>
-
+    <Label fx:id="aiRecommendationLabel" text="AI Recommendations will appear here..." style="-fx-text-fill: blue;" />
     <HBox spacing="10">
-        <Button text="Predict Reservations" onAction="#handlePredictReservations"/>
+        <Button text="Predict Reservations" onAction="#handlePredictReservation"/>
         <Button text="Predict Inventory" onAction="#handlePredictInventory"/>
-        <Button text="Predict Staff" onAction="#handlePredictStaff"/>
         <Button text="Predict Future Demand" onAction="#handlePredictFutureDemand"/>
     </HBox>
-
-    <HBox spacing="10">
-        <TextField fx:id="inputField" promptText="Enter Date or Item"/>
-        <Button text="Custom Predict" onAction="#handleCustomPrediction"/>
-    </HBox>
-
-    <!-- Table to show AI reports -->
-    <TableView fx:id="aiReportTable" prefHeight="300" prefWidth="500">
+    <TextField fx:id="customInput" promptText="Enter Date or Item"/>
+    <Button text="Custom Predict" onAction="#handleCustomPredict"/>
+    <TableView fx:id="predictionsTable" prefHeight="300" prefWidth="500">
         <columns>
-            <TableColumn fx:id="colCategory" text="Category"/>
-            <TableColumn fx:id="colPrediction" text="Prediction"/>
-            <TableColumn fx:id="colRecommendation" text="Recommendation"/>
+            <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
+            <TableColumn fx:id="predictionColumn" text="Prediction" prefWidth="200"/>
+            <TableColumn fx:id="recommendationColumn" text="Recommendation" prefWidth="250"/>
         </columns>
     </TableView>
-
     <Button text="Back to Main Menu" onAction="#handleBack"/>
 </VBox>
+
