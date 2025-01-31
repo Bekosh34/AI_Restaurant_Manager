@@ -1,25 +1,28 @@
 package com.ai.restaurant.gui;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class PredictionEntry {
-    private String category;
-    private String prediction;
-    private String recommendation;
+    private final StringProperty category;
+    private final StringProperty prediction;
+    private final StringProperty recommendation;
 
     public PredictionEntry(String category, String prediction, String recommendation) {
-        this.category = category;
-        this.prediction = prediction;
-        this.recommendation = recommendation;
+        this.category = new SimpleStringProperty(category);
+        this.prediction = new SimpleStringProperty(prediction);
+        this.recommendation = new SimpleStringProperty(recommendation);
     }
 
-    public String getCategory() {
+    public StringProperty categoryProperty() {
         return category;
     }
 
-    public String getPrediction() {
+    public StringProperty predictionProperty() {
         return prediction;
     }
 
-    public String getRecommendation() {
+    public StringProperty recommendationProperty() {
         return recommendation;
     }
 }

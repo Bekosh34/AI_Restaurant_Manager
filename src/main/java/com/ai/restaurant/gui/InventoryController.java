@@ -132,7 +132,7 @@ public class InventoryController {
         try {
             // Example features: quantity
             double[] features = {Double.parseDouble(quantityField.getText()), 1.0};
-            String prediction = AIModel.predictInventory(features);
+            String prediction = AIModel.predictDemand(features);
             aiRecommendationLabel.setText("AI Suggestion: " + prediction);
         } catch (Exception e) {
             aiRecommendationLabel.setText("Error generating inventory suggestions.");

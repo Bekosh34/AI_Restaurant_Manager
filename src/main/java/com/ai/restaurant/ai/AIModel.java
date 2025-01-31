@@ -1,51 +1,124 @@
 package com.ai.restaurant.ai;
 
-import com.ai.restaurant.model.TrainModel;
 import weka.classifiers.Classifier;
-import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
+import weka.core.Attribute;
 import weka.core.DenseInstance;
-import weka.core.Instance;
 import weka.core.Instances;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AIModel {
     private static Classifier model;
     private static Instances dataset;
+    private static final List<String> VALID_CLASSES = List.of("High", "Medium", "Low"); // Ensure only valid classes
 
-    public static void trainModel() throws Exception {
-        dataset = TrainModel.createEmptyDataset();
-        model = new J48();
-        model.buildClassifier(dataset);
-        System.out.println("✅ AI Model trained successfully!");
-    }
+    public static void trainModel() {
+        try {
+            ArrayList<Attribute> attributes = new ArrayList<>();
+            attributes.add(new Attribute("confidence")); // Use confidence as a feature
 
-    public static String predictReservation(double[] features) throws Exception {
-        return predict(features, "High Demand", "Low Demand");
-    }
+            // Define allowed class values
+            ArrayList<String> classValues = new ArrayList<>(VALID_CLASSES);
+            Attribute classAttribute = new Attribute("prediction", classValues);
+            attributes.add(classAttribute);
 
-    public static String predictInventory(double[] features) throws Exception {
-        return predict(features, "Stock Low", "Stock Sufficient");
-    }
+            dataset = new Instances("TrainingData", attributes, 0);
+            dataset.setClassIndex(dataset.numAttributes() - 1);
 
-    public static String predictMenuItem(double[] features) throws Exception {
-        return predict(features, "Popular Item", "Less Popular Item");
-    }
+            // Load training data from database
+            loadTrainingData();
 
-    public static String predictStaff(double[] features) throws Exception {
-        return predict(features, "More Staff Needed", "Staffing Sufficient");
-    }
+            // Ensure enough data exists before training
+            if (dataset.numInstances() == 0) {
+                throw new Exception("Not enough training data!");
+            }
 
-    private static String predict(double[] features, String positiveOutcome, String negativeOutcome) throws Exception {
-        if (model == null) {
-            throw new IllegalStateException("Model not trained!");
+            model = new RandomForest();
+            model.buildClassifier(dataset);
+
+            System.out.println("✅ AI Model trained successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("❌ Failed to train AI Model.");
         }
+    }
 
-        Instance instance = new DenseInstance(features.length + 1);
+    private static void loadTrainingData() {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:restaurant.db");
+             Statement stmt = conn.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT id, category, prediction, recommendation FROM ai_predictions"
+            );
+
+
+            while (rs.next()) {
+                double confidence = rs.getDouble("confidence");
+                String fullPrediction = rs.getString("prediction");
+
+                // Extract only "High", "Medium", or "Low"
+                String prediction = extractLabel(fullPrediction);
+
+                if (VALID_CLASSES.contains(prediction)) {
+                    addTrainingInstance(new double[]{confidence}, prediction);
+                } else {
+                    System.err.println("⚠️ Skipping invalid prediction: " + fullPrediction);
+                }
+            }
+
+            System.out.println("🔹 Training data loaded successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("⚠️ Failed to load training data.");
+        }
+    }
+
+    /**
+     * Extracts only "High", "Medium", or "Low" from a full prediction string.
+     */
+    private static String extractLabel(String fullPrediction) {
+        for (String validClass : VALID_CLASSES) {
+            if (fullPrediction.contains(validClass)) {
+                return validClass;
+            }
+        }
+        return "Unknown"; // Default case for invalid values
+    }
+
+
+    private static void addTrainingInstance(double[] features, String classValue) {
+        DenseInstance instance = new DenseInstance(features.length + 1);
         for (int i = 0; i < features.length; i++) {
-            instance.setValue(TrainModel.createEmptyDataset().attribute(i), features[i]);
+            instance.setValue(dataset.attribute(i), features[i]);
         }
-        instance.setDataset(TrainModel.createEmptyDataset());
+        instance.setValue(dataset.classAttribute(), classValue);
+        instance.setDataset(dataset);
+        dataset.add(instance);
+    }
 
-        double prediction = model.classifyInstance(instance);
-        return prediction == 1.0 ? positiveOutcome : negativeOutcome;
+    public static String predictDemand(double[] features) {
+        try {
+            if (model == null || dataset == null) {
+                return "Model not trained";
+            }
+
+            DenseInstance instance = new DenseInstance(features.length + 1);
+            for (int i = 0; i < features.length; i++) {
+                instance.setValue(dataset.attribute(i), features[i]);
+            }
+            instance.setDataset(dataset);
+
+            double prediction = model.classifyInstance(instance);
+            return dataset.classAttribute().value((int) prediction);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Prediction Error";
+        }
     }
 }

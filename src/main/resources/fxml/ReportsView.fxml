@@ -20,4 +20,3 @@
     </TableView>
     <Button text="Back to Main Menu" onAction="#handleBack"/>
 </VBox>
-
