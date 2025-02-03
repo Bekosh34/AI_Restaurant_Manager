@@ -1,0 +1,61 @@
+/* Dark Mode */
+.root {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-border-color: #2c3e50;
+}
+
+.table-view {
+    -fx-background-color: #2c3e50;
+    -fx-border-color: #34495e;
+}
+
+.text-field {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-border-color: #2c3e50;
+}
+.table-view {
+    -fx-background-color: #2c3e50;
+    -fx-border-color: #34495e;
+}
+
+.table-view .column-header {
+    -fx-background-color: #1f2b38;
+    -fx-text-fill: white;
+}
+
+.table-row-cell {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #03DAC5;
+    -fx-text-fill: black;
+}
+.button {
+    -fx-background-color: #1abc9c;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #16a085;
+}
+
+.secondary-button {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #2c3e50;
+}

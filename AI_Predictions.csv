@@ -1,0 +1,78 @@
+Category,Prediction,Recommendation,Timestamp,Orders,Reservations,Inventory
+Reservations,High,Optimize peak hours.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Medium,Stock up essential items.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Low,Adjust menu pricing.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Medium,Increase table turnover.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,High,Order more fresh produce.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Low,Offer special discounts.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Medium,Optimize staff shifts.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,High,Increase storage capacity.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,High,Extend operating hours.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Low,Promote seasonal items.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Medium,Offer loyalty discounts.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Low,Monitor supplier delays.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,High,Launch new menu items.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,High,Advertise event bookings.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Medium,Reduce overstock.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Low,Run promotional campaigns.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Medium,Enhance social media ads.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Medium,Optimize peak time service.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,High,Increase supplier contracts.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Low,Improve customer retention.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Reservation Flow: High,Consider promotions.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Inventory Demand: High,Reduce stock orders.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Future Demand Trends: High,Introduce new offers.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Reservation Flow: High,Consider promotions.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Inventory Demand: High,Reduce stock orders.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Future Demand Trends: High,Introduce new offers.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Reservation Flow: High,Consider promotions.,2025-01-31 17:35:43,0.0,0.0,0.0
+Reservations,Reservation Flow: High,Optimize peak hours.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Inventory Demand: High,Stock up essential items.,2025-01-31 17:35:43,0.0,0.0,0.0
+Future Demand,Future Demand Trends: High,Adjust menu pricing.,2025-01-31 17:35:43,0.0,0.0,0.0
+Inventory,Inventory Demand: High,Stock up essential items.,2025-01-31 17:35:43,0.0,0.0,0.0
+Custom,Custom Prediction: High,AI-generated suggestion.,2025-01-31 17:35:43,0.0,0.0,0.0
+General,High Demand,Increase inventory to meet demand,2025-01-31 17:35:43,10.0,5.0,20.0
+General,High Demand,null,2025-01-31 17:35:43,10.0,5.0,20.0
+General,High Demand,Increase inventory to meet demand,2025-01-31 17:35:43,10.0,5.0,20.0
+General,High Demand,Increase inventory and adjust pricing,2025-01-31 17:35:43,10.0,5.0,20.0
+Reservations,Model not trained,Offer discounts.,2025-01-31 17:37:03,26.0,26.0,76.0
+Inventory,Model not trained,Reduce stock orders.,2025-01-31 17:37:04,26.0,26.0,76.0
+Future Demand,Model not trained,Introduce promotions.,2025-01-31 17:37:05,26.0,26.0,76.0
+Reservations,Model not trained,Offer discounts.,2025-01-31 17:37:15,26.0,26.0,76.0
+Reservations,High,Optimize seating,null,10.0,5.0,20.0
+Inventory,Low,Stock up ingredients,null,15.0,2.0,50.0
+Future Demand,Medium,Introduce promotions,null,20.0,8.0,30.0
+Inventory,Model not trained,Reduce stock orders.,2025-01-31 17:41:18,26.0,26.0,76.0
+Reservations,Model not trained,Offer discounts.,2025-01-31 17:41:19,26.0,26.0,76.0
+Future Demand,Model not trained,Introduce promotions.,2025-01-31 17:41:20,26.0,26.0,76.0
+Inventory,Model not trained,Reduce stock orders.,2025-01-31 17:44:29,26.0,26.0,76.0
+Future Demand,Model not trained,Introduce promotions.,2025-01-31 17:44:31,26.0,26.0,76.0
+Reservations,Model not trained,Offer discounts.,2025-01-31 17:44:32,26.0,26.0,76.0
+Reservations,Prediction Error,Offer discounts.,2025-01-31 18:17:04,26.0,26.0,76.0
+Inventory,Prediction Error,Reduce stock orders.,2025-01-31 18:17:04,26.0,26.0,76.0
+Future Demand,Prediction Error,Introduce promotions.,2025-01-31 18:17:05,26.0,26.0,76.0
+Reservations,Prediction Error: Index Issue,Offer discounts.,2025-01-31 18:23:27,26.0,26.0,76.0
+Inventory,Prediction Error: Index Issue,Reduce stock orders.,2025-01-31 18:23:28,26.0,26.0,76.0
+Future Demand,Prediction Error: Index Issue,Introduce promotions.,2025-01-31 18:23:29,26.0,26.0,76.0
+Reservations,Medium,Monitor peak hours.,2025-01-31 18:57:12,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-01-31 18:57:12,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-01-31 18:57:12,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-01-31 18:57:14,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-01-31 18:57:16,26.0,26.0,76.0
+Reservations,Medium,Monitor peak hours.,2025-01-31 18:57:17,26.0,26.0,76.0
+Reservations,Medium,Monitor peak hours.,2025-01-31 19:05:17,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-01-31 19:05:18,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-01-31 19:05:19,26.0,26.0,76.0
+Reservations,Medium,Monitor peak hours.,2025-01-31 19:05:23,26.0,26.0,76.0
+Reservations,Medium,Monitor peak hours.,2025-02-01 13:23:11,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-02-01 13:23:17,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-02-01 13:23:19,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-02-01 14:00:47,26.0,26.0,76.0
+Reservations,Medium,Monitor peak hours.,2025-02-01 14:00:49,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-02-01 14:00:49,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-02-01 15:52:53,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-02-01 15:52:54,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-02-01 16:06:23,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-02-01 16:06:26,26.0,26.0,76.0
+Future Demand,Medium,Monitor demand trends.,2025-02-01 16:06:27,26.0,26.0,76.0
+Inventory,Medium,Maintain levels.,2025-02-01 16:06:29,26.0,26.0,76.0

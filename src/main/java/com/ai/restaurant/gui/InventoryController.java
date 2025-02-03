@@ -23,6 +23,7 @@ public class InventoryController {
     @FXML
     private TableColumn<Inventory, Integer> quantityColumn;
 
+
     @FXML
     private TextField itemNameField;
 

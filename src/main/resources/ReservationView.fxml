@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" padding="20" alignment="CENTER" stylesheets="@styles.css"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReservationController">
+
+    <Label text="Manage Reservations" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent;"/>
+
+    <TableView fx:id="reservationTable" prefHeight="400" prefWidth="800" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50" />
+            <TableColumn fx:id="customerColumn" text="Customer Name" prefWidth="300" />
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="200" />
+            <TableColumn fx:id="tableNumberColumn" text="Table Number" prefWidth="150" />
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="customerField" promptText="Customer Name" style="-fx-background-color: white; -fx-border-color: lightgray;"/>
+        <TextField fx:id="dateField" promptText="YYYY-MM-DD" style="-fx-background-color: white; -fx-border-color: lightgray;"/>
+        <TextField fx:id="tableNumberField" promptText="Table Number" style="-fx-background-color: white; -fx-border-color: lightgray;"/>
+        <Button text="+ Add" onAction="#handleAddReservation" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="🗑 Delete Selected" onAction="#handleDeleteReservation" style="-fx-background-color: #d9534f; -fx-text-fill: white;"/>
+        <Button text="↩ Back" onAction="#handleBack" style="-fx-background-color: gray; -fx-text-fill: white;"/>
+    </HBox>
+</VBox>

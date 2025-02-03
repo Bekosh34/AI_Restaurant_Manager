@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" alignment="CENTER" stylesheets="@styles.css"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReportsController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label fx:id="aiRecommendationLabel" text="AI Recommendations will appear here..."
+           styleClass="info-label"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Predict Reservations" onAction="#handlePredictReservation" styleClass="primary-button"/>
+        <Button text="Predict Inventory" onAction="#handlePredictInventory" styleClass="secondary-button"/>
+        <Button text="Predict Future Demand" onAction="#handlePredictFutureDemand" styleClass="primary-button"/>
+    </HBox>
+
+    <TextField fx:id="customInput" promptText="Enter Date or Item" styleClass="text-field"/>
+    <Button text="Custom Predict" onAction="#handleCustomPredict" styleClass="primary-button"/>
+
+    <TableView fx:id="predictionsTable" prefHeight="400" prefWidth="600" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="categoryColumn" text="Category" prefWidth="180" styleClass="table-column"/>
+            <TableColumn fx:id="predictionColumn" text="Prediction" prefWidth="220" styleClass="table-column"/>
+            <TableColumn fx:id="recommendationColumn" text="Recommendation" prefWidth="200" styleClass="table-column"/>
+        </columns>
+    </TableView>
+
+    <Button text="Back to Main Menu" onAction="#handleBack" styleClass="secondary-button"/>
+</VBox>

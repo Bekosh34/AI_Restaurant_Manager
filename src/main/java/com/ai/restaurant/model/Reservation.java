@@ -1,47 +1,29 @@
 package com.ai.restaurant.model;
 
+import javafx.beans.property.*;
+
 public class Reservation {
-    private int id;
-    private String customerName;
-    private String date;
-    private int tableNumber; // Ensure this matches the database structure
+    private final IntegerProperty id;
+    private final StringProperty customerName;
+    private final StringProperty date;
+    private final IntegerProperty tableNumber;
 
     public Reservation(int id, String customerName, String date, int tableNumber) {
-        this.id = id;
-        this.customerName = customerName;
-        this.date = date;
-        this.tableNumber = tableNumber;
+        this.id = new SimpleIntegerProperty(id);
+        this.customerName = new SimpleStringProperty(customerName);
+        this.date = new SimpleStringProperty(date);
+        this.tableNumber = new SimpleIntegerProperty(tableNumber);
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id.get(); }
+    public IntegerProperty idProperty() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getCustomerName() { return customerName.get(); }
+    public StringProperty customerNameProperty() { return customerName; }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+    public String getDate() { return date.get(); }
+    public StringProperty dateProperty() { return date; }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(int tableNumber) {
-        this.tableNumber = tableNumber;
-    }
+    public int getTableNumber() { return tableNumber.get(); }
+    public IntegerProperty tableNumberProperty() { return tableNumber; }
 }

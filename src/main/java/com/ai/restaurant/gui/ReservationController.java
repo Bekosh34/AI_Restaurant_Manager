@@ -1,47 +1,89 @@
 package com.ai.restaurant.gui;
 
+import com.ai.restaurant.database.DatabaseManager;
+import com.ai.restaurant.model.Reservation;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.collections.*;
-import com.ai.restaurant.model.Reservation;
-import com.ai.restaurant.managers.ReservationManager;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
+
+import java.util.List;
 
 public class ReservationController {
+
+    @FXML private TableView<Reservation> reservationTable;
+    @FXML private TableColumn<Reservation, Integer> idColumn;
+    @FXML private TableColumn<Reservation, String> customerColumn;
+    @FXML private TableColumn<Reservation, String> dateColumn;
+    @FXML private TableColumn<Reservation, Integer> tableColumn;
+    @FXML private TableColumn<Reservation, Integer> tableNumberColumn;
     @FXML private TextField customerNameField;
     @FXML private TextField dateField;
     @FXML private TextField tableNumberField;
-    @FXML private TableView<Reservation> reservationTable;
     @FXML private Label feedbackLabel;
+
+    @FXML
+    public void initialize() {
+        // Debugging: Ensure TableColumns are Linked
+        if (idColumn == null || customerColumn == null || dateColumn == null || tableColumn == null) {
+            System.out.println("❌ ERROR: One or more TableColumns are null. Check FXML bindings!");
+            return;
+        }
+
+        // Set up TableColumns
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tableNumberColumn.setCellValueFactory(new PropertyValueFactory<>("tableNumber"));
+
+        loadReservations();
+    }
+
+    private void loadReservations() {
+        List<Reservation> reservations = DatabaseManager.getReservations();
+        System.out.println("✅ Reservations Loaded: " + reservations);
+        reservationTable.setItems(FXCollections.observableArrayList(reservations));
+    }
 
     @FXML
     private void handleAddReservation() {
         String customerName = customerNameField.getText();
         String date = dateField.getText();
-        String tableNumber = tableNumberField.getText();
-        if (customerName.isEmpty() || date.isEmpty() || tableNumber.isEmpty()) {
-            feedbackLabel.setText("⚠️ Please fill all fields!");
+        String tableNumberText = tableNumberField.getText();
+
+        if (customerName.isEmpty() || date.isEmpty() || tableNumberText.isEmpty()) {
+            feedbackLabel.setText("❌ All fields are required!");
             return;
         }
-        ReservationManager.addReservation(new Reservation(0, customerName, date, Integer.parseInt(tableNumber)));
-        refreshReservationTable();
+
+        try {
+            int tableNumber = Integer.parseInt(tableNumberText);
+            DatabaseManager.addReservation(customerName, date, tableNumber);
+            feedbackLabel.setText("✅ Reservation added successfully!");
+            loadReservations();
+        } catch (NumberFormatException e) {
+            feedbackLabel.setText("❌ Table Number must be a number!");
+        }
     }
 
     @FXML
     private void handleDeleteReservation() {
         Reservation selectedReservation = reservationTable.getSelectionModel().getSelectedItem();
         if (selectedReservation != null) {
-            ReservationManager.deleteReservation(selectedReservation.getId());
-            refreshReservationTable();
+            DatabaseManager.deleteReservation(selectedReservation.getId());
+            feedbackLabel.setText("✅ Reservation deleted!");
+            loadReservations();
+        } else {
+            feedbackLabel.setText("❌ No reservation selected!");
         }
     }
 
     @FXML
-    private void handleBack() {
-        feedbackLabel.getScene().getWindow().hide();
-    }
-
-    private void refreshReservationTable() {
-        ObservableList<Reservation> reservationList = FXCollections.observableArrayList(ReservationManager.getAllReservations());
-        reservationTable.setItems(reservationList);
+    private void handleBack(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

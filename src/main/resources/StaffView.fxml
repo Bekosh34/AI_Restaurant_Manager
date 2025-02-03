@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" alignment="CENTER" stylesheets="@styles.css"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.StaffController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Manage Staff" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+    <Label fx:id="feedbackLabel" text="Feedback will appear here..." styleClass="info-label"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="nameField" promptText="Staff Name" styleClass="text-field"/>
+        <TextField fx:id="roleField" promptText="Role" styleClass="text-field"/>
+        <Button text="Add Staff" onAction="#handleAddStaff" styleClass="primary-button"/>
+    </HBox>
+
+    <TableView fx:id="staffTable" prefHeight="400" prefWidth="600" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="100" styleClass="table-column"/>
+            <TableColumn fx:id="nameColumn" text="Name" prefWidth="250" styleClass="table-column"/>
+            <TableColumn fx:id="roleColumn" text="Role" prefWidth="200" styleClass="table-column"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Update Role" onAction="#handleUpdateRole" styleClass="secondary-button"/>
+        <Button text="Delete Selected Staff" onAction="#handleDeleteStaff" styleClass="danger-button"/>
+    </HBox>
+
+    <Button text="Back to Main Menu" onAction="#handleBack" styleClass="secondary-button"/>
+</VBox>
