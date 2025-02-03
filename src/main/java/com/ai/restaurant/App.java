@@ -10,7 +10,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
             Scene scene = new Scene(loader.load(), 800, 600);
             stage.setScene(scene);
             stage.setTitle("AI Restaurant Manager");

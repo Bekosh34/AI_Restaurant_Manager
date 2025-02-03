@@ -2,8 +2,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="15" padding="20" alignment="CENTER" stylesheets="@styles.css"
+<?import javafx.geometry.Insets?>
+<VBox spacing="15" alignment="CENTER" stylesheets="@styles.css"
       xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.ReservationController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
     <Label text="Manage Reservations" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent;"/>
 
@@ -27,4 +32,6 @@
         <Button text="🗑 Delete Selected" onAction="#handleDeleteReservation" style="-fx-background-color: #d9534f; -fx-text-fill: white;"/>
         <Button text="↩ Back" onAction="#handleBack" style="-fx-background-color: gray; -fx-text-fill: white;"/>
     </HBox>
+
+    <Label fx:id="feedbackLabel" text="" style="-fx-text-fill: red;"/>
 </VBox>

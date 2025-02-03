@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<StackPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.MainController" styleClass="root">
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.ai.restaurant.gui.MainController" fx:id="rootPane" styleClass="root">
     <stylesheets>
         <URL value="@styles.css"/>
     </stylesheets>
 
     <children>
-        <VBox fx:id="contentBox" spacing="20.0" alignment="CENTER">
+        <VBox spacing="20.0" alignment="CENTER">
             <Label text="AI Restaurant Manager" styleClass="header-label"/>
 
             <VBox spacing="15.0" alignment="CENTER">
@@ -19,10 +19,6 @@
                 <Button text="Manage Staff" onAction="#handleStaffButton" styleClass="main-menu-button" maxWidth="300.0"/>
                 <Button text="Generate Reports" onAction="#handleReportsButton" styleClass="main-menu-button" maxWidth="300.0"/>
             </VBox>
-
-            <HBox alignment="CENTER">
-                <ToggleButton fx:id="darkModeToggle" text="🌙 Dark Mode" onAction="#toggleDarkMode"/>
-            </HBox>
         </VBox>
     </children>
 </StackPane>

@@ -18,9 +18,8 @@ public class ReservationController {
     @FXML private TableColumn<Reservation, Integer> idColumn;
     @FXML private TableColumn<Reservation, String> customerColumn;
     @FXML private TableColumn<Reservation, String> dateColumn;
-    @FXML private TableColumn<Reservation, Integer> tableColumn;
     @FXML private TableColumn<Reservation, Integer> tableNumberColumn;
-    @FXML private TextField customerNameField;
+    @FXML private TextField customerField;
     @FXML private TextField dateField;
     @FXML private TextField tableNumberField;
     @FXML private Label feedbackLabel;
@@ -28,7 +27,7 @@ public class ReservationController {
     @FXML
     public void initialize() {
         // Debugging: Ensure TableColumns are Linked
-        if (idColumn == null || customerColumn == null || dateColumn == null || tableColumn == null) {
+        if (idColumn == null || customerColumn == null || dateColumn == null || tableNumberColumn == null) {
             System.out.println("❌ ERROR: One or more TableColumns are null. Check FXML bindings!");
             return;
         }
@@ -50,7 +49,7 @@ public class ReservationController {
 
     @FXML
     private void handleAddReservation() {
-        String customerName = customerNameField.getText();
+        String customerName = customerField.getText();
         String date = dateField.getText();
         String tableNumberText = tableNumberField.getText();
 
@@ -64,6 +63,7 @@ public class ReservationController {
             DatabaseManager.addReservation(customerName, date, tableNumber);
             feedbackLabel.setText("✅ Reservation added successfully!");
             loadReservations();
+            clearFields();
         } catch (NumberFormatException e) {
             feedbackLabel.setText("❌ Table Number must be a number!");
         }
@@ -79,6 +79,12 @@ public class ReservationController {
         } else {
             feedbackLabel.setText("❌ No reservation selected!");
         }
+    }
+
+    private void clearFields() {
+        customerField.clear();
+        dateField.clear();
+        tableNumberField.clear();
     }
 
     @FXML
